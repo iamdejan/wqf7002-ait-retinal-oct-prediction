@@ -7,23 +7,17 @@ from PIL import Image
 
 
 def get_device():
-    if torch.cuda.is_available():
-        device = torch.device("cuda")  # NVIDIA GPU
-    elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
-        device = torch.device("mps")  # Apple Silicon (Metal)
-    else:
-        device = torch.device("cpu")  # Fallback
-    return device
+    # Run everything in CPU, since GPU is not supported by Streamlit.
+    return torch.device("cpu")
 
 
 @st.cache_resource
 def load_model():
-    vgg16 = models.vgg16_bn()
+    vgg16 = models.vgg16_bn().to(get_device())
     vgg16.classifier[-1] = nn.Linear(4096, 4)
     model_path = 'model/VGG16_OCT_Retina_trained_model.pt'
-    vgg16.load_state_dict(torch.load(model_path))
+    vgg16.load_state_dict(torch.load(model_path, map_location=get_device()))
     vgg16.eval()
-    vgg16 = vgg16.to(get_device())
     return vgg16
 
 
