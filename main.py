@@ -21,10 +21,11 @@ def load_model():
     return vgg16
 
 
-def predict(uploaded_file):
-    img = Image.open(uploaded_file).convert("RGB")
-    st.image(img, caption="Uploaded image")
+def load_image(uploaded_file) -> Image:
+    return Image.open(uploaded_file).convert("RGB")
 
+
+def predict(img: Image) -> int:
     transform = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(224),
@@ -38,8 +39,7 @@ def predict(uploaded_file):
         preds_new_model = vgg16(img)
 
     _, predicted_class_new_model = torch.max(preds_new_model, 1)
-    result_new_model = int(predicted_class_new_model)
-    st.write(result_new_model)
+    return int(predicted_class_new_model)
 
 
 def main():
@@ -47,7 +47,10 @@ def main():
     st.text("This is a simple program to upload OCT Retina image, then detect the disease")
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
-        predict(uploaded_file)
+        img = load_image(uploaded_file)
+        st.image(img, caption="Uploaded image")
+        result = predict(img)
+        st.write(result)
 
 
 if __name__ == "__main__":
