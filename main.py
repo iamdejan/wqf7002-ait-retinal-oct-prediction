@@ -84,7 +84,7 @@ These are small, yellowish deposits of lipids (fats) and proteins that accumulat
 While a few small drusen are a normal part of aging, a large number of bigger drusen are a common early sign of age-related macular degeneration (AMD).
 """,
         statistics="""
-According to a survey of ophthalmology studies, in 2020 there were an estimated 18.8 million people worldwide with DME (Vujosevic et al.).
+According to a survey of ophthalmology studies, in 2020 there were an estimated 18.8 million people worldwide with DME (Vujosevic et al., 2024).
 """,
         is_normal=False
     ),
