@@ -19,6 +19,7 @@ Original dataset: [Retinal OCT images](https://www.kaggle.com/datasets/fabrizior
 
 1) Run `uv sync`.
 2) Run `git lfs install`.
+3) Run `git lfs track "*.pt"`.
 
 ## Run
 
